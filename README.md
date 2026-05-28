@@ -4,7 +4,7 @@ Batch-convert Canon **CR2** RAW photos to **JPG**. Comes with an interactive pro
 
 ## What it does
 
-Given a folder of `.CR2` files, it produces a `.jpg` for each one using the camera's white balance and a gentle highlight recovery. By default it skips files that already have a `.jpg` next to them, so you can re-run it safely. Conversion runs in parallel across all CPU cores, so a batch of a few hundred photos finishes in a fraction of the single-threaded time.
+Given a folder of `.CR2` files, it produces a `.jpg` for each one using the camera's white balance and a gentle highlight recovery. By default it skips files that would overwrite an existing JPG in the output folder, so you can re-run it safely. Conversion runs in parallel across all CPU cores, so a batch of a few hundred photos finishes in a fraction of the single-threaded time.
 
 ## Install — macOS
 
@@ -15,7 +15,7 @@ Given a folder of `.CR2` files, it produces a `.jpg` for each one using the came
    python3 --version
    ```
 
-   If it prints something like `Python 3.11.x`, you're good. If not, install it from <https://www.python.org/downloads/macos/>.
+   If it prints `Python 3.9` or newer, you're good. If not, install it from <https://www.python.org/downloads/macos/>.
 
 3. `cd` into this folder. If the project lives on your Desktop:
 
@@ -40,7 +40,7 @@ Next time you want to use it, just open Terminal, `cd` into the folder, and run 
 
 ## Install — Windows
 
-1. Install **Python 3.11+** from <https://www.python.org/downloads/windows/>.
+1. Install **Python 3.9 or newer** from <https://www.python.org/downloads/windows/>.
    **Important:** on the first installer screen, tick **"Add python.exe to PATH"**.
 2. Open **PowerShell** (Start menu → type "PowerShell").
 3. `cd` into this folder. If the project lives in your Documents:
@@ -68,6 +68,8 @@ Next time you want to use it, just open Terminal, `cd` into the folder, and run 
    pip install -r requirements.txt
    ```
 
+Next time you want to use it, just open PowerShell, `cd` into the folder, and run `.\.venv\Scripts\Activate.ps1` before `python main.py`.
+
 ## How to use
 
 ### The easy way (interactive)
@@ -87,6 +89,8 @@ It will ask you:
 
 You'll see a progress bar and a summary at the end.
 
+Note: interactive mode always skips existing JPGs and uses all CPU cores. If you need to overwrite existing files or limit the number of parallel workers, use the argument form below.
+
 ### The fast way (arguments)
 
 If you prefer to type everything at once:
@@ -98,11 +102,21 @@ python main.py path/to/cr2s path/to/output --quality 85 --recursive
 Available flags:
 
 - `--quality N` — JPG quality 1–100, default 92.
-- `--recursive` — also search subfolders.
+- `--recursive` — also search subfolders. When you pass a separate output folder, the input's subfolder structure is preserved (e.g., `input/a/b/x.CR2` → `output/a/b/x.jpg`).
 - `--overwrite` — overwrite existing JPGs (otherwise they're skipped).
 - `--workers N` — number of parallel workers (default: all CPU cores). Use a smaller number if the computer becomes too sluggish to use while converting.
 
 Run `python main.py --help` to see this again.
+
+### Try the sample
+
+A sample CR2 file is included in this repo at `example/13.CR2`. To smoke-test your install:
+
+```bash
+python main.py example
+```
+
+This will produce `example/13.jpg` next to it.
 
 ## Troubleshooting
 
