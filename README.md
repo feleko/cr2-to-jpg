@@ -1,5 +1,9 @@
 # Photo Converter
 
+[![CI](https://github.com/feleko/cr2-to-jpg/actions/workflows/ci.yml/badge.svg)](https://github.com/feleko/cr2-to-jpg/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/github/license/feleko/cr2-to-jpg)](LICENSE)
+
 Batch-convert Canon **CR2** RAW photos to **JPG**. Comes with an interactive prompt — just run it and answer the questions.
 
 ## What it does
