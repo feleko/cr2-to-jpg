@@ -1,0 +1,16 @@
+[project]
+name = "photo-converter"
+version = "0.1.0"
+description = "Batch-convert Canon CR2 RAW photos to JPG."
+requires-python = ">=3.9"
+dependencies = [
+    "rawpy>=0.18",
+    "imageio>=2.0",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+photo-converter = "main:main"
